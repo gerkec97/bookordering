@@ -1,0 +1,20 @@
+GkBasket\Domain\Domain\Entities\Basket:
+  type: entity
+  repositoryClass: GkBasket\Infrastructure\Persistence\Doctrine\Repositories\Domain\BasketRepository
+  table: domains
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update

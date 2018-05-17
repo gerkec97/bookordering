@@ -1,0 +1,31 @@
+ip: 192.168.10.123
+memory: 2048
+cpus: 1
+provider: virtualbox
+authorize: ~/.ssh/id_rsa.pub
+keys:
+    - ~/.ssh/id_rsa
+folders:
+    - map: /YOURDIR/services
+      to: /home/vagrant/code/services
+
+sites:
+    - map: lggkbooks.test
+      to: /home/vagrant/code/services/front/public
+    - map: lggkuser.test
+      to: /home/vagrant/code/services/user/public
+    - map: lggkcatalog.test
+      to: /home/vagrant/code/services/catalog/public
+    - map: lggkbasket.test
+      to: /home/vagrant/code/services/basket/public
+    - map: lggkorder.test
+      to: /home/vagrant/code/services/order/public
+databases:
+    - front
+    - user
+    - basket
+    - order
+    - catalog
+
+name: bookddd
+hostname: bookddd

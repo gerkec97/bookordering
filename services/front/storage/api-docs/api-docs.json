@@ -1,0 +1,404 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "The LGGK Book Emporium",
+        "description": "This is the web facing end of the bookstore. The magic though happens behind closed doors",
+        "contact": {
+            "email": "gobothersomeoneelse@example.com"
+        },
+        "version": "0.9"
+    },
+    "paths": {
+        "/user/{username}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get user by user name",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Updated user",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "name that to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid user supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete user",
+                "operationId": "unregister",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The name that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid username supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/{username}/purchase-history": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get purchase history for a user by user name",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserPurchaseHistory"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create user",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/basket/{basketId}": {
+            "get": {
+                "tags": [
+                    "basket"
+                ],
+                "summary": "Get a basket by id",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "basketId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Basket"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid basket id supplied"
+                    },
+                    "404": {
+                        "description": "Basket not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "basket"
+                ],
+                "summary": "Add item to basket",
+                "operationId": "addItem",
+                "parameters": [
+                    {
+                        "name": "basketId",
+                        "in": "path",
+                        "description": "The basket id of the basket that needs to be filled",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "item id that goes into the basket",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid basketId supplied"
+                    },
+                    "404": {
+                        "description": "basket not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "basket"
+                ],
+                "summary": "Delete basket",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "basketId",
+                        "in": "path",
+                        "description": "The basket id of the basket that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid basketId supplied"
+                    },
+                    "404": {
+                        "description": "basket not found"
+                    }
+                }
+            }
+        },
+        "/basket": {
+            "post": {
+                "tags": [
+                    "basket"
+                ],
+                "summary": "Create a basket",
+                "operationId": "create",
+                "requestBody": {
+                    "description": "Create basket object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/basket/{basketId}/checkout": {
+            "put": {
+                "tags": [
+                    "basket"
+                ],
+                "summary": "Checkout the basket",
+                "operationId": "checkout",
+                "parameters": [
+                    {
+                        "name": "basketId",
+                        "in": "path",
+                        "description": "The basket id of the basket that will be checked out",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid basketId supplied"
+                    },
+                    "404": {
+                        "description": "basket not found"
+                    }
+                }
+            }
+        },
+        "/basket/{basketId}/{productId}": {
+            "delete": {
+                "tags": [
+                    "basket"
+                ],
+                "summary": "Remove an item from the basket",
+                "operationId": "removeItem",
+                "parameters": [
+                    {
+                        "name": "basketId",
+                        "in": "path",
+                        "description": "The basket id of the basket containing the item",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "The product id of the item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid basketId supplied"
+                    },
+                    "404": {
+                        "description": "basket not found"
+                    }
+                }
+            }
+        },
+        "/catalog": {
+            "get": {
+                "tags": [
+                    "catalog"
+                ],
+                "summary": "Get available books",
+                "operationId": "showBooks",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Books"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Catalog not found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "user",
+            "description": "This is all about you, dear user"
+        },
+        {
+            "name": "basket",
+            "description": "Do your shopping here with our basket"
+        },
+        {
+            "name": "catalog",
+            "description": "Access to Books"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "laravel/homestead": "^7.4"
+    },
+    "require": {
+        "laravel/lumen-installer": "^1.0"
+    }
+}
